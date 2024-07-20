@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option go_package = "github.com/matttproud/contextualizing-contexts/proto";
+
+package proto;
+
+message Request {}
+message Response {}
+
+service Test {
+  rpc Exercise (Request) returns (Response) {}
+}
