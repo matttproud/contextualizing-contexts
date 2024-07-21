@@ -19,7 +19,14 @@ context API.
 * `{grpc,http}-deadline`: reveals what deadline the server library attaches to
   the context (if any).
 
-The server samples serve to `localhost:8080`:
+  `http-deadline-synth` demonstrates a deadline with the HTTP stack using
+  a homegrown `X-MTP-Deadline` request header (uses `http.TimeFormat` values).
+
+  ```
+  $ curl -H "X-MTP-Deadline: $(LC_ALL=C TZ=GMT date -d 'now + 1 minutes' '+%a, %d %b %Y %T %Z')" localhost:8080
+  ```
+
+The server samples serve on `localhost:8080`:
 
 * Clients can exercise the HTTP servers with curl:
 
