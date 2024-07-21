@@ -16,7 +16,10 @@ context API.
   respective server libraries to establish when lifetime begins and ends in
   isolation.
 
-The server samples serve to `:8080`:
+* `{grpc,http}-deadline`: reveals what deadline the server library attaches to
+  the context (if any).
+
+The server samples serve to `localhost:8080`:
 
 * Clients can exercise the HTTP servers with curl:
 
