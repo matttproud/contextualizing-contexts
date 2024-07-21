@@ -12,9 +12,13 @@ context API.
   libraries to connect how the server's dispatch functions handle context
   lifetime.
 
+* `{grpc,http}-notify`: shows the lifetime behaviors of the context from the
+  respective server libraries to establish when lifetime begins and ends in
+  isolation.
+
 The server samples serve to `:8080`:
 
-* Clients can exercise the HTTP serverswith curl:
+* Clients can exercise the HTTP servers with curl:
 
   ```
   $ curl localhost:8080

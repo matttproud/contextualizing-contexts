@@ -4,7 +4,6 @@ import (
 	"context"
 	"log"
 	"net"
-	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
@@ -12,25 +11,18 @@ import (
 	servicepb "github.com/matttproud/contextualizing-contexts/proto"
 )
 
-func f(ctx context.Context) {
-	log.Println("[BEGIN] f")
-	defer log.Println("[END] f")
-	select {
-	case <-time.After(5 * time.Second):
-		log.Println("5s")
-	case <-ctx.Done():
-		log.Println("canceled")
-	}
-}
-
 type server struct {
 	servicepb.UnimplementedTestServer // What kind of viral nonsense of an antipattern is this?
+}
+
+func g() {
+	log.Println("g(): context has been canceled")
 }
 
 func (server) Exercise(ctx context.Context, req *servicepb.Request) (*servicepb.Response, error) {
 	log.Println("[BEGIN] Serving gRPC")
 	defer log.Println("[DONE] Serving gRPC")
-	f(ctx)
+	context.AfterFunc(ctx, g)
 	return new(servicepb.Response), nil
 }
 

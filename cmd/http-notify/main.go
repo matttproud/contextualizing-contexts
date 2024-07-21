@@ -4,24 +4,16 @@ import (
 	"context"
 	"log"
 	"net/http"
-	"time"
 )
 
-func f(ctx context.Context) {
-	log.Println("[BEGIN] f")
-	defer log.Println("[END] f")
-	select {
-	case <-time.After(5 * time.Second):
-		log.Println("5s")
-	case <-ctx.Done():
-		log.Println("canceled")
-	}
+func g() {
+	log.Println("g(): context has been canceled")
 }
 
 func serveHTTP(_ http.ResponseWriter, r *http.Request) {
 	log.Println("[BEGIN] Serving HTTP")
 	defer log.Println("[DONE] Serving HTTP")
-	f(r.Context())
+	context.AfterFunc(r.Context(), g)
 }
 
 func main() {
