@@ -26,6 +26,10 @@ context API.
   $ curl -H "X-MTP-Deadline: $(LC_ALL=C TZ=GMT date -d 'now + 1 minutes' '+%a, %d %b %Y %T %Z')" localhost:8080
   ```
 
+* `{grpc,http}-complete`: these combine respectively
+  `{grpc,http}-{branch,deadline,notify}` and `http-deadline-synth` into one
+  server to show you all of the moving parts of the original quiz.
+
 The server samples serve on `localhost:8080`:
 
 * Clients can exercise the HTTP servers with curl:
